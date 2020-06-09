@@ -25,7 +25,7 @@
                  [io.netty/netty-transport "4.1.39.Final"]
 
                  [org.clojure/tools.logging "1.1.0"]
-
+                 [ch.qos.logback/logback-classic "1.2.3"]
                  [nomnom/utility-belt "1.2.3" :exclusions [nrepl]]]
   :main ^:skip-aot graleph.core
   :target-path "target/%s"
