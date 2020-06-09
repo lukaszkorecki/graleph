@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 while true ; do
-  echo "foo:$RANDOM|c" | tee /dev/stderr | nc -w 1 -uc  127.0.0.1 8025
+  echo "foo:$RANDOM|c" | tee /dev/stderr | nc -w 1 -u 127.0.0.1 8025
   sleep 1
 done
