@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+native-image   --report-unsupported-elements-at-runtime   --no-server   --no-fallback \
+     -H:+ReportExceptionStackTraces \
+     --initialize-at-build-time \
+     --initialize-at-run-time=io.netty.channel.epoll.EpollEventArray,io.netty.channel.unix.Errors,io.netty.channel.unix.IovArray,io.netty.channel.unix.Socket,io.netty.channel.epoll.Native,io.netty.channel.epoll.EpollEventLoop,io.netty.util.internal.logging.Log4JLogger \
+     --allow-incomplete-classpath \
+     -jar  /app/graleph.jar \
+     -H:Name=/app/graleph

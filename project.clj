@@ -29,4 +29,5 @@
                  [nomnom/utility-belt "1.2.3" :exclusions [nrepl]]]
   :main ^:skip-aot graleph.core
   :target-path "target/%s"
+  :uberjar-name "graleph-standalone.jar"
   :profiles {:uberjar {:aot :all}})
