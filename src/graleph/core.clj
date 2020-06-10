@@ -11,6 +11,7 @@
 ;; Adopted from aleph.udp examples
 (defn parse-statsd-packet
   [{:keys [message]}]
+  (log/info (str message))
   (let [message (bs/to-string message)
         [metric value] (str/split message #":")]
     [metric value]))
@@ -48,13 +49,18 @@
      :watcher watcher}))
 
 
+(defn stop-all! [{:keys [sock flusher watcher] }]
+  (stop sock)
+  (future-cancel flusher)
+  (future-cancel watcher))
+
 (defn -main
   [& args]
   (log/info "starting")
-  (let [{:keys [watcher flusher sock]} (start-and-monitor)]
+  (let [{:keys [watcher flusher sock] :as res} (start-and-monitor)]
+    (log/infof "w: %s f: %s s: %s" watcher flusher sock)
     (lifecycle/register-shutdown-hook :stop (fn []
                                               (log/warn "stopping")
-                                              (stop sock)
-                                              (future-cancel flusher)
-                                              (future-cancel watcher)))
+                                              (stop-all! res)
+                                             ))
     (lifecycle/install-shutdown-hooks!)))
