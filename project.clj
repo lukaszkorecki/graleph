@@ -27,4 +27,5 @@
   :main ^:skip-aot graleph.core
   :target-path "target/%s"
   :uberjar-name "graleph-standalone.jar"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+                       :aot :all}})
