@@ -8,6 +8,7 @@
     [manifold.stream :as s]
     [utility-belt.lifecycle :as lifecycle]))
 
+
 ;; Adopted from aleph.udp examples
 (defn parse-statsd-packet
   [{:keys [message]}]
@@ -49,10 +50,11 @@
      :watcher watcher}))
 
 
-(defn stop-all! [{:keys [sock flusher watcher] }]
+(defn stop-all! [{:keys [sock flusher watcher]}]
   (stop sock)
   (future-cancel flusher)
   (future-cancel watcher))
+
 
 (defn -main
   [& args]
@@ -61,6 +63,5 @@
     (log/infof "w: %s f: %s s: %s" watcher flusher sock)
     (lifecycle/register-shutdown-hook :stop (fn []
                                               (log/warn "stopping")
-                                              (stop-all! res)
-                                             ))
+                                              (stop-all! res)))
     (lifecycle/install-shutdown-hooks!)))
