@@ -8,6 +8,7 @@
     [manifold.stream :as s]
     [utility-belt.lifecycle :as lifecycle]))
 
+(set! *warn-on-reflection* true)
 
 ;; Adopted from aleph.udp examples
 (defn parse-statsd-packet
