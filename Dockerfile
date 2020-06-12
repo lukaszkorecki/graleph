@@ -26,6 +26,7 @@ WORKDIR /app
 
 COPY --from=builder /app/graleph.jar .
 
+COPY reflect.json ./reflect.json
 COPY ./script/compile /app/compile
 
 RUN /app/compile
